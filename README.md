@@ -19,4 +19,4 @@ The maps will be randomly chosen for each screenshot.
 
 Map name can be anything, currently it is only used for log messages and keeping track of what is what in the map .csv.
 
-Finished screenshots will be put in the skin folder as `_screenshot.webp`
+Finished screenshots will be put in the skin folder as `_4k.webp` and `_540p.webp`
