@@ -51,6 +51,11 @@ def ExtractImage(outputfile=str, start=str):
 
 for i in GetSkins(dir=SkinDirectory)[0]:
     CurrentMap = MapList[random.randrange(len(MapList))]
-    outputfile = str("output\\" + i + " (played on " + CurrentMap[0] + ").webp").replace("-", "")
-    RenderVideo(skin=i, exec=DanserExec, map=CurrentMap)
-    ExtractImage(start=CurrentMap[4], outputfile=outputfile)
+    outputfile = str(SkinDirectory + "\\" + i + "\\" + "_screenshot.webp")
+    if not os.path.isfile(outputfile):
+        print("Rendering " + i + " on " + CurrentMap[0])
+        RenderVideo(skin=i, exec=DanserExec, map=CurrentMap)
+        print("Generating image...")
+        ExtractImage(start=CurrentMap[4], outputfile=outputfile)
+    else:
+        print("Skipping " + i + " as it was already generated")
