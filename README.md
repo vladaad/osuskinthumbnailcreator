@@ -5,7 +5,7 @@ You will need:
  - [Danser](https://github.com/Wieku/danser-go) 0.5.0 or newer
  - [FFmpeg](https://github.com/FFmpeg/FFmpeg) with libwebp and libx264
 
-First, change skin and song path in `settings.json`
+First, change skin and song path in `settings.json` and in `main.py` itself
 
 Put the maps you want to create thumbnails with into list.csv in this format:
 
