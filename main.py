@@ -32,30 +32,41 @@ def RenderVideo(skin=str, map=list, exec=str):
         "-skin", skin,
         "-knockout"
     ]
-    subprocess.run(DanserCommand)
+    subprocess.run(DanserCommand, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-def ExtractImage(outputfile=str, start=str):
+def ExtractImage(outputdir=str, start=str):
     FFmpegCommmand = [
-        "ffmpeg",
+        "ffmpeg", "-y",
         "-ss", start,
         "-i", "temp.mkv",
         "-vframes", "1",
         "-c:v", "libwebp",
         "-quality", "100",
-        outputfile
+        (outputdir + "_4k.webp")
     ]
-    subprocess.run(FFmpegCommmand)
+    FFmpegCommmandLowRes = [
+        "ffmpeg", "-y",
+        "-ss", start,
+        "-i", "temp.mkv",
+        "-vf", "scale=960:540:flags=lanczos",
+        "-vframes", "1",
+        "-c:v", "libwebp",
+        "-quality", "70",
+        (outputdir + "_540p.webp")
+    ]
+    subprocess.run(FFmpegCommmand, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(FFmpegCommmandLowRes, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     os.remove("temp.mkv")
 
 
 for i in GetSkins(dir=SkinDirectory)[0]:
     CurrentMap = MapList[random.randrange(len(MapList))]
-    outputfile = str(SkinDirectory + "\\" + i + "\\" + "_screenshot.webp")
-    if not os.path.isfile(outputfile):
+    outputdir = SkinDirectory + "\\" + i + "\\"
+    if not os.path.isfile(outputdir + "_4k.webp") or not os.path.isfile(outputdir + "_540p.webp"):
         print("Rendering " + i + " on " + CurrentMap[0])
         RenderVideo(skin=i, exec=DanserExec, map=CurrentMap)
         print("Generating image...")
-        ExtractImage(start=CurrentMap[4], outputfile=outputfile)
+        ExtractImage(start=CurrentMap[4], outputdir=outputdir)
     else:
         print("Skipping " + i + " as it was already generated")
