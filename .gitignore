@@ -1,0 +1,7 @@
+*.log
+*.exe
+danser.db
+*.json
+*.csv
+output/
+assets.dpak
