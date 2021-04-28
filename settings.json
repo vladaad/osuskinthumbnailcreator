@@ -95,7 +95,7 @@
 			"FoldInReplays": false
 		},
 		"Boundaries": {
-			"Enabled": true,
+			"Enabled": false,
 			"BorderThickness": 1,
 			"BorderFill": 1,
 			"BorderColor": {
