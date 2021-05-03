@@ -2,7 +2,8 @@
 	"General": {
 		"OsuSongsDir": "C:\\Users\\adame\\AppData\\Local\\osu!\\Songs",
 		"OsuSkinsDir": "C:\\Users\\adame\\AppData\\Local\\osu!\\Skins",
-		"DiscordPresenceOn": true
+		"DiscordPresenceOn": true,
+		"UnpackOszFiles": true
 	},
 	"Graphics": {
 		"Width": 2560,
@@ -34,6 +35,8 @@
 	"Input": {
 		"LeftKey": "Z",
 		"RightKey": "X",
+		"RestartKey": "`",
+		"SmokeKey": "C",
 		"MouseButtonsDisabled": true,
 		"MouseHighPrecision": false,
 		"MouseSensitivity": 1
@@ -114,7 +117,8 @@
 		"ShowResultsScreen": false,
 		"ResultsScreenTime": 5,
 		"ShowWarningArrows": false,
-		"FlashlightDim": 1
+		"FlashlightDim": 1,
+		"PlayUsername": "Guest"
 	},
 	"Skin": {
 		"CurrentSkin": "default",
@@ -216,6 +220,8 @@
 					"Value": 1
 				}
 			],
+			"UseSkinComboColors": false,
+			"UseBeatmapComboColors": false,
 			"Sliders": {
 				"WhiteScorePoints": true,
 				"ScorePointColorOffset": 0,
@@ -303,7 +309,8 @@
 				"DrawOverBlur": true,
 				"ParallaxMultiplier": 0.5,
 				"Density": 1,
-				"Scale": 1
+				"Scale": 1,
+				"Speed": 1
 			}
 		},
 		"Logo": {
@@ -400,6 +407,7 @@
 		"Filters": "",
 		"AudioCodec": "aac",
 		"AudioBitrate": "64k",
+		"AudioFilters": "",
 		"OutputDir": ".",
 		"Container": "mkv",
 		"MotionBlur": {

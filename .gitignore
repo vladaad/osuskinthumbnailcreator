@@ -8,5 +8,6 @@ danser.db
 *.wav
 output/
 replays/
+screenshots/
 .idea/
 assets.dpak

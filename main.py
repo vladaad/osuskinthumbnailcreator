@@ -22,42 +22,32 @@ def GetSkins(dir=str):
     return directories
 
 
-def RenderVideo(skin=str, map=list, exec=str):
+def RenderImage(skin=str, map=list, exec=str):
     DanserCommand = [
         exec,
         "-out", "temp",
         "-md5", map[1],
-        "-start", map[2],
-        "-end", map[3],
+        "-ss", map[2],
         "-skin", skin,
-        "-knockout"
+        "-knockout",
+        "-nodbcheck"
     ]
     subprocess.run(DanserCommand, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-def ExtractImage(outputdir=str, start=str):
+def ExtractImage(outputdir=str):
     FFmpegCommmand = [
         "ffmpeg", "-y",
-        "-ss", start,
-        "-i", "temp.mkv",
-        "-vframes", "1",
+        "-i", "screenshots/temp.png",
         "-c:v", "libwebp",
         "-quality", "100",
-        (outputdir + "_4k.webp")
-    ]
-    FFmpegCommmandLowRes = [
-        "ffmpeg", "-y",
-        "-ss", start,
-        "-i", "temp.mkv",
-        "-vf", "scale=960:540:flags=lanczos",
-        "-vframes", "1",
+        (outputdir + "_4k.webp"),
         "-c:v", "libwebp",
         "-quality", "70",
         (outputdir + "_540p.webp")
     ]
     subprocess.run(FFmpegCommmand, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    subprocess.run(FFmpegCommmandLowRes, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    os.remove("temp.mkv")
+    os.remove("screenshots/temp.png")
 
 
 for i in GetSkins(dir=SkinDirectory)[0]:
@@ -65,8 +55,8 @@ for i in GetSkins(dir=SkinDirectory)[0]:
     outputdir = SkinDirectory + "\\" + i + "\\"
     if not os.path.isfile(outputdir + "_4k.webp") or not os.path.isfile(outputdir + "_540p.webp"):
         print("Rendering " + i + " on " + CurrentMap[0])
-        RenderVideo(skin=i, exec=DanserExec, map=CurrentMap)
+        RenderImage(skin=i, exec=DanserExec, map=CurrentMap)
         print("Generating image...")
-        ExtractImage(start=CurrentMap[4], outputdir=outputdir)
+        ExtractImage(outputdir=outputdir)
     else:
         print("Skipping " + i + " as it was already generated")
